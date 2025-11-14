@@ -4,7 +4,7 @@
 
 //#define DELAY 700000
 #define DELAY 70000
-#define DEBOUNCE_LENGTH 25
+#define DEBOUNCE_LENGTH 100
 
 uint32_t ONBOARD_LED_PIN = 5; //port a
 uint32_t OFFBOARD_LED_PIN = 4; //port b
@@ -38,7 +38,7 @@ int main(void) {
 	GPIOC->OSPEEDR.pin7 = 0;
 	GPIOC->PUPDR.pin7 = 2;
 
-	bool led_status = false;
+	bool read_reset = true;
 
 	//the infinite loop of the program
 	while (1) {
@@ -47,41 +47,52 @@ int main(void) {
 
 		while(delay--){
 
-			if (debounce_delay == 0)
+			if (read_reset == false)
 			{
-				if (readPin(GPIOC, BUTTON_PIN) )
+				if (!readPin(GPIOC, BUTTON_PIN) )
+					read_reset = true;
+			}
+
+			else if (read_reset == true)
+			{
+
+				if (debounce_delay == 0)
+				{
+					if (readPin(GPIOC, BUTTON_PIN) )
+					{
+						debounce_delay++;
+					}
+					else
+					{
+						debounce_delay = 0;
+					}
+				}
+				else if (debounce_delay > 0 && debounce_delay < DEBOUNCE_LENGTH)
 				{
 					debounce_delay++;
 				}
 				else
 				{
-					debounce_delay = 0;
-				}
-			}
-			else if (debounce_delay > 0 && debounce_delay < DEBOUNCE_LENGTH)
-			{
-				debounce_delay++;
-			}
-			else
-			{
-				if (readPin(GPIOC, BUTTON_PIN) )
-				{
-					//ledBlink(GPIOB, OFFBOARD_LED_PIN);
-					/*if (led_status)
+					if (readPin(GPIOC, BUTTON_PIN) )
 					{
-						pinClear(GPIOB, OFFBOARD_LED_PIN);
-						led_status = false;
+						ledBlink(GPIOB, OFFBOARD_LED_PIN);
+						/*if (led_status)
+						{
+							pinClear(GPIOB, OFFBOARD_LED_PIN);
+							led_status = false;
+						}
+						else
+						{
+							pinSet(GPIOB, OFFBOARD_LED_PIN);
+							led_status = true;
+						}*/
+						debounce_delay = 0;
+						read_reset = false;
 					}
 					else
 					{
-						pinSet(GPIOB, OFFBOARD_LED_PIN);
-						led_status = true;
-					}*/
-					debounce_delay = 0;
-				}
-				else
-				{
-					debounce_delay = 0;
+						debounce_delay = 0;
+					}
 				}
 			}
 		}
