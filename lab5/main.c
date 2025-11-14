@@ -4,7 +4,7 @@
 
 //#define DELAY 700000
 #define DELAY 70000
-#define DEBOUNCE_LENGTH 25
+#define DEBOUNCE_LENGTH 100
 
 uint32_t ONBOARD_LED_PIN = 5; //port a
 uint32_t OFFBOARD_LED_PIN = 4; //port b
