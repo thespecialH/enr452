@@ -6,6 +6,8 @@
 #define GPIOB_REGISTERS ((uint32_t)0x40020400U)
 #define GPIOC_REGISTERS ((uint32_t)0x40020800U)
 #define RCC_REGISTERS	((uint32_t)0x40023800U)
+#define SYSCFG_REGISTERS ((uint32_t)0x40013800U)
+#define EXTI_REGISTERS ((uint32_t)0x40013C00)
 
 typedef union
 {
@@ -95,6 +97,19 @@ typedef union
 	};
 } reg32bit2;
 
+typedef union
+{
+	volatile uint32_t data;
+	struct
+	{
+		volatile uint32_t group0: 4;
+		volatile uint32_t group1: 4;
+		volatile uint32_t group2: 4;
+		volatile uint32_t group3: 4;
+
+	};
+} extibit;
+
 typedef struct
 {
 	reg32bit CR;
@@ -107,11 +122,14 @@ typedef struct
 	reg32bit RESERVED1;
 	reg32bit APB1RSTR; //0x020
 	reg32bit APB2RSTR; //0x024
-	reg32bit RESERVED2;
-	reg32bit RESERVED3;
-	reg32bit AHB1ENR;
-	reg32bit AHB2ENR;
-	reg32bit AHB3ENR;
+	reg32bit RESERVED2; //0x028
+	reg32bit RESERVED3; //0x02C
+	reg32bit AHB1ENR; //0x030
+	reg32bit AHB2ENR; //0x034
+	reg32bit AHB3ENR;//0x038
+	reg32bit RESERVED4; //0x03C
+	reg32bit RESERVED5; //0x40
+	reg32bit APB2ENR; //0x44
 
 } RCC_TypeDef;
 
@@ -130,12 +148,42 @@ typedef struct
 
 } GPIO_TypeDef;
 
+typedef struct
+{
+	reg32bit MEMRMP; //0x00
+	reg32bit PMC; //0x04
+	extibit EXTICR1; //0x08
+	extibit EXTICR2; //0x0C
+	extibit EXTICR3; //0x10
+	extibit EXTICR4; //0x14
+	reg32bit RESERVED1; //0x18
+	reg32bit RESERVED2; //0x1C
+	reg32bit CMPCR; //0x20
+	reg32bit CFGR; //0x2C
+
+} SYSCFG_TypeDef;
+
+
+typedef struct
+{
+	reg32bit IMR; //0x00
+	reg32bit EMR; //0x04
+	reg32bit RTSR; //0x08
+	reg32bit FTSR; //0x0C
+	reg32bit SWIER; //0x10
+	reg32bit PR; //0x14
+
+} EXTI_TypeDef;
+
+
 
 
 #define RCC	(( RCC_TypeDef * )RCC_REGISTERS )
 #define GPIOA (( GPIO_TypeDef * )GPIOA_REGISTERS )
 #define GPIOB (( GPIO_TypeDef *)GPIOB_REGISTERS )
 #define GPIOC (( GPIO_TypeDef *)GPIOC_REGISTERS )
+#define SYSCFG (( SYSCFG_TypeDef *)SYSCFG_REGISTERS )
+#define EXTI (( EXTI_TypeDef *)EXTI_REGISTERS )
 
 //GPIOB->AHB4ENR |= RCC_AHB4ENR_GPIOBEN; set the first bit to 1
 

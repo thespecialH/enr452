@@ -19,6 +19,9 @@ int main(void) {
 	RCC->AHB1ENR.bit1 = 1;
 	RCC->AHB1ENR.bit2 = 1;
 
+	//enable SYSCFG
+	RCC->APB2ENR.bit14 = 1;
+
 	
 	//port a
 	GPIOA->MODER.pin5 = 1;
@@ -37,6 +40,14 @@ int main(void) {
 	GPIOC->OTYPER.bit7 = 0;
 	GPIOC->OSPEEDR.pin7 = 0;
 	GPIOC->PUPDR.pin7 = 2;
+
+	//set up the interrupt
+	SYSCFG->EXTICR2.group3 = 0x02;
+	
+	//interrupt registers
+	EXTI->IMR.bit7 = 1;
+
+	EXTI->RTSR.bit7 = 1;
 
 	bool read_reset = true;
 
