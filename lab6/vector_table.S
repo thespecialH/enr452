@@ -15,42 +15,42 @@ vtable:
 .word reset_handler
 .word NMI_handler
 .word hard_fault_handler
+.word 0 //MemManage
+.word 0 //BusFault
+.word 0 //Reserved
+.word 0 
 .word 0
 .word 0
 .word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
+.word 0 //SVCall
+.word 0 //Debut Monitor
+.word 0 //Reserved
+.word 0 //PendSV
 .word SysTick_handler
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word 0
-.word test_handler
+.word 0 //WWDG
+.word 0 //PVD
+.word 0 //TAMP_STAMP
+.word 0 //RTC_WKUP
+.word 0 //FLASH
+.word 0 //RCC
+.word 0 //EXTI0
+.word 0 //EXTI1
+.word 0 //EXTI2
+.word 0 //EXTI3
+.word 0 //EXTI4
+.word 0 //DMA1_Stream0
+.word 0 //DMA1_Stream1
+.word 0 //DMA1_Stream2
+.word 0 //DMA1_Stream3
+.word 0 //DMA1_Stream4
+.word 0 //DMA1_Stream5
+.word 0 //DMA1_Stream6
+.word 0 //ADC
+.word 0 //CAN1_TX
+.word 0 //CAN1_RX0
+.word 0 //CAN1_Rx1
+.word 0 //CAN1_SCE
+.word exti_handler //EXTI9_5
 
 
 // Location to Boot from RAM startup

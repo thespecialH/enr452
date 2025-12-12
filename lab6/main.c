@@ -13,7 +13,7 @@ uint32_t BUTTON_PIN = 7; //port c
 
 int debounce_delay = 0;
 
-void test_handler(void);
+void exti_handler(void);
 
 int main(void) {
 
@@ -112,7 +112,7 @@ int main(void) {
 	}
 }
 
-void test_handler(void) {
+void exti_handler(void) {
 	for (int i = 0; i < 120000; i++)
 	{
 		pinSet(GPIOB, OFFBOARD_LED_PIN);
