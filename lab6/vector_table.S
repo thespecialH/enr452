@@ -36,7 +36,7 @@ vtable:
 .word 0 //EXTI0
 .word 0 //EXTI1
 .word 0 //EXTI2
-.word 0 //EXTI3
+.word button2_handler //EXTI3
 .word 0 //EXTI4
 .word 0 //DMA1_Stream0
 .word 0 //DMA1_Stream1
@@ -50,7 +50,24 @@ vtable:
 .word 0 //CAN1_RX0
 .word 0 //CAN1_Rx1
 .word 0 //CAN1_SCE
-.word exti_handler //EXTI9_5
+.word button1_handler //EXTI9_5
+.word 0 //TIM1_BRK_TIM9
+.word 0 //TIM1_UP_TIM10
+.word 0 //TIM1_TG_COM_TIM11
+.word 0 //TIM1_CC
+.word 0 //TIM2
+.word 0 //TIM3
+.word 0 //TIM4
+.word 0 //I2C1_EV
+.word 0 //I2C1_ER
+.word 0 //I2C2_EV
+.word 0 //I2C2_ER
+.word 0 //SPI1
+.word 0 //SPI2
+.word 0 //USART1
+.word 0 //USART2
+.word 0 //USART3
+.word button0_handler //EXTI15_10
 
 
 // Location to Boot from RAM startup
