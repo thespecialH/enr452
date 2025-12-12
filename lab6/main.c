@@ -54,10 +54,10 @@ int main(void) {
 	GPIOB->PUPDR.pin3 = 2;
 
 	//button 0 port c pin 13
-	GPIOB->MODER.pin13 = 0;
-	GPIOB->OTYPER.bit13 = 0;
-	GPIOB->OSPEEDR.pin13 = 0;
-	GPIOB->PUPDR.pin13 = 2;
+	GPIOC->MODER.pin13 = 0;
+	GPIOC->OTYPER.bit13 = 0;
+	GPIOC->OSPEEDR.pin13 = 0;
+	GPIOC->PUPDR.pin13 = 2;
 
 	//set up the interrupt
 	//button 1
@@ -80,7 +80,7 @@ int main(void) {
 	//button 0
 	EXTI->IMR.bit13 = 1;
 	EXTI->RTSR.bit13 = 1;
-	NVIC->ISER1.bit9 = 1;
+	NVIC->ISER1.bit8 = 1;
 
 
 	//the infinite loop of the program
@@ -101,6 +101,10 @@ int main(void) {
 		if (button == 1 || button == 2)
 		{
 			ledBlink(GPIOB, OFFBOARD_LED_PIN);
+		}
+		if (button == 0)
+		{
+			pinClear(GPIOB, OFFBOARD_LED_PIN);
 		}
 
 		ledBlink(GPIOA, ONBOARD_LED_PIN);
