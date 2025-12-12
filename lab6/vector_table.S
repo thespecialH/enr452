@@ -27,6 +27,30 @@ vtable:
 .word 0
 .word 0
 .word SysTick_handler
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word 0
+.word test_handler
 
 
 // Location to Boot from RAM startup
@@ -53,4 +77,3 @@ default_interrupt_handler:
       B default_interrupt_loop
 
 .size default_interrupt_handler, .-default_interrupt_handler
-

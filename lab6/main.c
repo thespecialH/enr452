@@ -1,5 +1,6 @@
 //AMDG
 #include "stm32f446re.h"
+#include "cortex-m4.h"
 #include "main.h"
 
 //#define DELAY 700000
@@ -49,11 +50,16 @@ int main(void) {
 
 	EXTI->RTSR.bit7 = 1;
 
+	NVIC->ISER0.bit23 = 1;
+
+
+
 	bool read_reset = true;
 
 	//the infinite loop of the program
 	while (1) {
 
+		/*
 		int delay = DELAY;
 
 		while(delay--){
@@ -87,16 +93,6 @@ int main(void) {
 					if (readPin(GPIOC, BUTTON_PIN) )
 					{
 						ledBlink(GPIOB, OFFBOARD_LED_PIN);
-						/*if (led_status)
-						{
-							pinClear(GPIOB, OFFBOARD_LED_PIN);
-							led_status = false;
-						}
-						else
-						{
-							pinSet(GPIOB, OFFBOARD_LED_PIN);
-							led_status = true;
-						}*/
 						debounce_delay = 0;
 						read_reset = false;
 					}
@@ -110,6 +106,7 @@ int main(void) {
 
 		ledBlink(GPIOA, ONBOARD_LED_PIN);
 
-
+		*/
 	}
 }
+
