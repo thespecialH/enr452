@@ -49,7 +49,6 @@ LFLAGS += -T$(LSCRIPT)
 AS_SRC   =  ./reset_handler.S
 AS_SRC   +=  ./vector_table.S
 C_SRC    =  ./main.c
-C_SRC    +=  ./test_handler.c
 
 OBJS  = $(AS_SRC:.S=.o)
 OBJS += $(C_SRC:.c=.o)
