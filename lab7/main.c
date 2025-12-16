@@ -164,7 +164,7 @@ void button2_handler(void) {
 	EXTI->PR.bit3 = 1;
 }
 
-void SysTick_Handler(void)
+void SysTick_handler(void)
 {
 	clock_tick++;
 }
